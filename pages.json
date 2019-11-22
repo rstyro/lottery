@@ -6,6 +6,18 @@
 			"style": {
 				"navigationBarTitleText": "开玩"
 			}
+		},
+		{
+			"path": "pages/brand/brand",
+			"style": {
+				"navigationBarTitleText": "翻牌"
+			}
+		},
+		{
+			"path": "pages/disc/disc",
+			"style": {
+				"navigationBarTitleText": "转盘"
+			}
 		}
 	],
 	"globalStyle": {

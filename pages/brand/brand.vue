@@ -159,52 +159,51 @@ export default {
 <style>
 .content {
 	text-align: center;
-	height: 400upx;
 	margin-top: 200upx;
 }
 
-        .bgbox{
-            width: 100%;
-            height:400px ;
-            margin: 40px auto;
-            background: #37C6C0;
-        }
-        .container {
-            position: relative;
-            width: 100px;
-            height: 150px;
-            float: left;
-        }
-        .container:nth-child(n+1){
-            margin: 25px 30px;
-        }
-        .brand{
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            transition: all 1.5s;
-            backface-visibility: hidden;
-        }
-        .brand-front{
-            /*background: #ccc;*/
-            width: 100%;
-            height: 100%;
-            background: url("../images/brand-back1.jpg") ;
-            background-size:100% 100%;
-        }
-        .brand-back{
-            background: #C24241;
-            width: 100%;
-            height: 100%;
-            /*background: url("../images/brand-back1.jpg") ;*/
-        }
-        .brand-text{
-            width: 20px;
-            line-height: 24px;
-            padding-top: 5px;
-            margin: 0px auto;
-            color:#fff;
-        }
+.bgbox{
+	width: 100%;
+	height:400px ;
+	margin: 40px auto;
+	/* background: #37C6C0; */
+}
+.container {
+	position: relative;
+	width: 100px;
+	height: 150px;
+	float: left;
+}
+.container:nth-child(n+1){
+	margin: 25px 30px;
+}
+.brand{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transition: all 1.5s;
+	backface-visibility: hidden;
+}
+.brand-front{
+	/*background: #ccc;*/
+	width: 100%;
+	height: 100%;
+	background: url("/static/img/brand-back1.jpg") ;
+	background-size:100% 100%;
+}
+.brand-back{
+	background: #C24241;
+	width: 100%;
+	height: 100%;
+	/*background: url("../images/brand-back1.jpg") ;*/
+}
+.brand-text{
+	width: 20px;
+	line-height: 24px;
+	padding-top: 5px;
+	margin: 0px auto;
+	color:#fff;
+}
 </style>

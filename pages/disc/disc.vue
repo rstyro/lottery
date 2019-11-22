@@ -10,31 +10,7 @@
                              </view>
                         </view>
                     </view>
-                    <view class="circle two">
-                        <view class="position-box" v-bind:style="{transform:'rotate('+circles.circle2.initAngle+'deg)', '-webkit-transition-duration': times}">
-                            <view v-for="(item, index) in circles.circle2.list" class="two-item"
-                                 v-bind:style="{background: item.bgColor, transform: 'rotate('+circles.circle2.avgAngle*(index)+'deg)' }">
-                                    <span>{{item.content}}</span>
-                             </view>
-                        </view>
-                    </view>
-                    <view class="circle three">
-                        <view class="position-box" v-bind:style="{transform:'rotate('+circles.circle3.initAngle+'deg)', '-webkit-transition-duration': times}">
-                            <view v-for="(item, index) in circles.circle3.list" class="other-item"
-                                 v-bind:style="{background: item.bgColor, transform: 'rotate('+circles.circle3.avgAngle*(index)+'deg)skewX(30deg)' }">
-                                 <span v-bind:style="{transform: 'rotate('+(circles.circle3.avgAngle*index)*-1+'deg)skewX(-30deg)' }" >{{item.content}}</span>
-                             </view>
-                        </view>
-                    </view>
-        
-                    <view class="circle thour">
-                        <view class="position-box" v-bind:style="{transform:'rotate('+circles.circle4.initAngle+'deg)', '-webkit-transition-duration': times}" >
-                            <view v-for="(item, index) in circles.circle4.list" class="two-item"
-                                 v-bind:style="{background: item.bgColor, transform: 'rotate('+circles.circle4.avgAngle*(index)+'deg)' }">
-                                    <span>{{item.content}}</span>
-                             </view>
-                        </view>
-                    </view>
+                    
         
                     <view class="arrowhead-box">
                         <view class="arrowhead"></view>
@@ -237,7 +213,6 @@ export default {
 	margin-top: 200upx;
 }
 #app{
-            width: 500px;
             height: 500px;
             margin: 1em auto;
         }
