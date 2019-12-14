@@ -6,6 +6,18 @@
 			<button type="primary" @click="toDisc()">硬币</button>
 			<button type="primary">设置</button>
 		</view>
+
+		<view class="navs">
+		    <view class="nav">
+		        <view class="">
+		            <view class="nav-name">大转盘</view>
+		            <view class="nav-desc">随机大转盘</view>
+		        </view>
+		        <view class="">
+		            <image></image>
+		        </view>
+		    </view>
+		<view>
 	</view>
 </template>
 
@@ -13,7 +25,14 @@
 export default {
 	data() {
 		return {
-			title: 'Hello'
+			title: 'Hello',
+			navs:[
+			{
+			    "name":"翻牌子",
+			    "desc":"翻牌子是古代帝王专享的一件事情",
+			    "logo":""
+			}
+			]
 		};
 	},
 	onLoad() {},
