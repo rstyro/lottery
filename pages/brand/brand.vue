@@ -1,34 +1,45 @@
 <template>
 	<view class="content">
-		    <view id="app">
-                <h1>{{title}}</h1>
-                <view class="bgbox">
-                        <view  v-for="(item,index) in brands.list" class="container"  @click="open(index)">
-                            <view class="brand" v-bind:style="{transform: 'rotateY('+item.frontAngle+'deg)'}">
-                                <view class="brand-front">
-        <!--                            <view class="brand-text" >{{item.frontText}}</view>-->
-                                </view>
-                            </view>
-                            <view class="brand" v-bind:style="{transform: 'rotateY('+item.backAngle+'deg)'}">
-                                <view class="brand-back"><view class="brand-text" >{{item.backText}}</view></view>
-                            </view>
-                        </view>
-                </view>
-                <h1 @click="shuffleBrands">{{shuffleSort}}</h1>
-                <h1 @click="allOpenBrands">{{openAllBrands}}</h1>
-        
-            </view>
+		<view class="bgbox">
+			<view  v-for="(item,index) in brands.list" class="container"  @click="open(index)">
+				<view class="brand" v-bind:style="{transform: 'rotateY('+item.frontAngle+'deg)'}">
+					<view class="brand-front">
+					</view>
+				</view>
+				<view class="brand" v-bind:style="{transform: 'rotateY('+item.backAngle+'deg)'}">
+					<view class="brand-back"><view class="brand-text" >{{item.backText}}</view></view>
+				</view>
+			</view>
+		</view>
+                
+		<view class="operateBtn row-box">
+			<view class="flex1" @click="allOpenBrands">
+				<view class="btn">{{openAllBrands}}</view>
+			</view>
+			<view class="flex1" @click="shuffleBrands">
+				<view class="btn">{{shuffleSort}}</view>
+			</view>
+		</view>
+        <topicChoose :topicName="topicName" @chooseTopic="chooseTopicFun"></topicChoose>
 	</view>
 </template>
 
 <script>
+	import topicChoose from '@/components/topic-choose/topic-choose.vue';
 export default {
+	components: {
+		topicChoose
+	},
 	data() {
 		return {
          title:"周末怎么过",
          shuffleSort: "洗牌",
-         openAllBrands: "全部打开",
+         openAllBrands: "全开",
          allOpen: false,
+		 operateState:{
+			 open:"全开",
+			 close:"全关"
+		 },
          brands:{
              times:'1.5s',
              list:[{
@@ -40,12 +51,6 @@ export default {
              },{
                  frontText: "请翻牌",
                  backText:"在家玩游戏",
-                 isOpen: false,
-                 frontAngle: 0,
-                 backAngle: -180
-             },{
-                 frontText: "请翻牌",
-                 backText:"在家看电影",
                  isOpen: false,
                  frontAngle: 0,
                  backAngle: -180
@@ -93,6 +98,11 @@ export default {
                  backAngle: -180
              }]
          },
+		 topicList:{
+			 list:[],
+			 
+		 },
+		 topicName:"默认"
 
      };
 	},
@@ -113,12 +123,12 @@ export default {
           operatorBrands(){
               for(var index=0;index<this.brands.list.length;index++){
                   if(this.allOpen){
-                      this.openAllBrands="全部关上";
+                      this.openAllBrands=this.operateState.close;
                       this.brands.list[index].isOpen=true;
                       this.brands.list[index].frontAngle=180;
                       this.brands.list[index].backAngle=0;
                   }else{
-                      this.openAllBrands="全部打开";
+                      this.openAllBrands=this.operateState.open;
                       this.brands.list[index].isOpen=false;
                       this.brands.list[index].frontAngle=0;
                       this.brands.list[index].backAngle=-180;
@@ -135,7 +145,7 @@ export default {
               //关牌再洗牌
               this.operatorBrands();
               setTimeout(()=>{
-                  this.brands.list = shuffleArr(this.brands.list,this.brands.list.length);
+                  this.brands.list = this.shuffleArr(this.brands.list,this.brands.list.length);
               },500)
 
           },
@@ -151,32 +161,36 @@ export default {
                  result.push(_arr[n]); // 取出当前最后的值，即刚才交换过来的值
              }
              return result;
-         }
+         },
+		 chooseTopicFun(){
+		 	console.log("num:",num);
+		 }
 	}
 };
 </script>
 
 <style>
+	page{
+		background: #ffe;
+	}
 .content {
+	margin: 0rpx;
+	padding: 0upx;
 	text-align: center;
-	margin-top: 200upx;
 }
-
 .bgbox{
 	width: 100%;
-	height:400px ;
-	margin: 40px auto;
-	/* background: #37C6C0; */
+	margin: 0px auto;
 }
 .container {
 	position: relative;
-	width: 100px;
+	width: 30%;
 	height: 150px;
 	float: left;
+	margin-top: 20upx;
+	margin-left: 2.5%;
 }
-.container:nth-child(n+1){
-	margin: 25px 30px;
-}
+
 .brand{
 	width: 100%;
 	height: 100%;
@@ -206,4 +220,16 @@ export default {
 	margin: 0px auto;
 	color:#fff;
 }
+.operateBtn{
+	clear: both;
+}
+.btn{
+	margin: 40upx auto;
+	width: 80%;
+	height: 80upx;
+	line-height: 80upx;
+	color: #fff;
+	background: #FF6666;
+}
+
 </style>
