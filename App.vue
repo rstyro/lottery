@@ -1,14 +1,24 @@
 <script>
+	import commons from '@/commons/commons.js'; 
 export default {
 	onLaunch: function() {
 		console.log('App Launch');
+		this.initTopic();
 	},
 	onShow: function() {
 		console.log('App Show');
 	},
 	onHide: function() {
 		console.log('App Hide');
-	}
+	},
+	 methods: {
+		 initTopic(){
+			var topics =commons.getTopicsByCache(commons.topicKey);
+			if(topics == ""){
+				commons.reset();
+			}
+		 }
+	 }
 };
 </script>
 

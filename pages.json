@@ -19,13 +19,15 @@
 				"navigationBarTitleText": "大转盘"
 			}
 		}
-	    ,{
-            "path" : "components/topic-choose/topic-choose",
-            "style" : {}
-        }
         ,{
             "path" : "pages/topic/choose/choose",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "主题列表",
+				"disableScroll":true,
+				"app-plus":{
+					"bounce":"none"
+				}
+			}
         }
     ],
 	"globalStyle": {

@@ -6,7 +6,7 @@
 					<view class="position-box" v-bind:style="{transform:'rotate('+circles.circle1.initAngle+'deg)', '-webkit-transition-duration': times}">
 						<view v-for="(item, index) in circles.circle1.list" class="other-item"
 							 v-bind:style="{ transform: 'rotate('+circles.circle1.avgAngle*(index)+'deg)skewX(45deg)' }">
-							 <span  v-bind:style="{transform: 'rotate(0deg)skewX(-45deg)' }" >{{item.content}}</span>
+							 <span  v-bind:style="{transform: 'rotate(0deg)skewX(-45deg)' }" >{{item}}</span>
 						 </view>
 					</view>
 				</view>
@@ -18,13 +18,14 @@
 					<view class="arrowhead"></view>
 				</view>
 			</view>
-			<view style="clear: both;margin-top: 20upx;" v-html="result"></view>
+			<view style="clear: both;margin-top: 20upx;color: #FF0033;" v-html="result"></view>
         </view> 
 		<topicChoose :topicName="topicName" @chooseTopic="chooseTopicFun"></topicChoose>
 	</view>
 </template>
 
 <script>
+	import commons from '@/commons/commons.js'; 
 	import topicChoose from '@/components/topic-choose/topic-choose.vue'; 
 export default {
 	components: {
@@ -37,31 +38,7 @@ export default {
 			   number: 8,
 			   initAngle: 0,
 			   avgAngle: 45,
-			   list:[{
-					   content: "电影院看电影",
-					   bgColor: '#FF99CC'
-				   },{
-					   content: "给对方刷牙",
-					   bgColor: '#FFCCCC'
-				   },{
-					   content: "逛超市",
-					   bgColor: '#FFFF99'
-				   },{
-					   content: "一起追剧",
-					   bgColor: '#CCCCFF'
-				   },{
-					   content: "一起玩游戏",
-					   bgColor: '#FF9966'
-				   },{
-					   content: "一起听音乐",
-					   bgColor: '#FFCC99'
-				   },{
-					   content: "给对方按摩",
-					   bgColor: '#CCFF99'
-				   },{
-					   content: "一起去菜市场",
-					   bgColor: '#CCCCCC'
-				   }]
+			   list:[]
 			   }
 	   },
 	   times:'2s',
@@ -70,8 +47,18 @@ export default {
 	   topicName:"默认"
 	 };
 	},
+	onShow() {
+		var topics =commons.getTopicsByCache();
+		if(topics == ""){
+			commons.reset();
+			this.setTopic();
+		}else{
+			this.setTopic();
+		}
+		console.log('App Show');
+	},
 	onLoad() {
-		
+		console.log("disc onLoad");
 	},
 	methods: {
 			rotateFun1(){
@@ -95,7 +82,7 @@ export default {
 					if(angle == this.circles.circle1.list.length){
 						angle=0;
 					}
-					return this.circles.circle1.list[angle].content;
+					return this.circles.circle1.list[angle];
 				}
 			},
 			showResult(){
@@ -103,7 +90,15 @@ export default {
 			   this.result=`<p>结果：${content1}</p>`;
 			},
 			chooseTopicFun(){
-				console.log("num:",num);
+				uni.navigateTo({
+				    url: '/pages/topic/choose/choose'
+				});
+			},
+			setTopic(){
+				var topics =commons.getTopicsByCache();
+				const curTopic = topics[commons.getCurIndex()];
+				this.circles.circle1.list=curTopic.list;
+				this.topicName=curTopic.topicName;
 			}
 		}
 	};

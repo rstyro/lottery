@@ -31,7 +31,7 @@
 				</view>
 			</view>
 			
-			<view class="lottery-nav lottery-nav-edit row-box" @click="toBrand()">
+			<view class="lottery-nav lottery-nav-edit row-box" @click="toEdit()">
 				<view class="flex2">
 					<view class="flex1 lottery-title">自定义</view>
 					<view class="flex1 lottery-desc">自定义主题：真心话大冒险、周末去哪儿、晚上吃什么、该不该表白</view>
@@ -79,6 +79,13 @@ export default {
 		toDisc(){
 			uni.navigateTo({
 				url: '/pages/disc/disc',
+				animationType: 'zoom-out',
+				animationDuration: 1000
+			});
+		},
+		toEdit(){
+			uni.navigateTo({
+			    url: '/pages/topic/choose/choose',
 				animationType: 'zoom-out',
 				animationDuration: 1000
 			});

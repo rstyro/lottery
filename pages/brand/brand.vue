@@ -25,6 +25,7 @@
 </template>
 
 <script>
+	import commons from '@/commons/commons.js';
 	import topicChoose from '@/components/topic-choose/topic-choose.vue';
 export default {
 	components: {
@@ -100,13 +101,24 @@ export default {
          },
 		 topicList:{
 			 list:[],
-			 
 		 },
 		 topicName:"默认"
 
      };
 	},
-	onLoad() {},
+	onShow() {
+		var topics =commons.getTopicsByCache();
+		if(topics == ""){
+			commons.reset();
+			this.setTopic();
+		}else{
+			this.setTopic();
+		}
+		console.log('App Show');
+	},
+	onLoad() {
+		
+	},
 	methods: {
 	    //翻单个牌
           open(index) {
@@ -163,7 +175,24 @@ export default {
              return result;
          },
 		 chooseTopicFun(){
-		 	console.log("num:",num);
+		 	uni.navigateTo({
+		 	    url: '/pages/topic/choose/choose',
+		 		animationType: 'zoom-out',
+		 		animationDuration: 1000
+		 	});
+		 },
+		 setTopic(){
+			var topics =commons.getTopicsByCache();
+			const curTopic = topics[commons.getCurIndex()];
+			this.topicName=curTopic.topicName;
+			if(curTopic.list.length>0){
+				for(var i=0;i<curTopic.list.length;i++){
+					console.log("this.brands.list[i].backText:",this.brands.list[i].backText);
+					console.log("curTopic.list[i]:",curTopic.list[i]);
+					this.brands.list[i].backText=curTopic.list[i];
+				}
+			}
+			this.shuffleBrands();
 		 }
 	}
 };

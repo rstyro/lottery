@@ -1,7 +1,7 @@
 <template>
 	<view class="topic-choose-box">
 		<view class="topic-box col-box">
-			<view class="topic-name flex1">主题：<text>{{topicName}}</text></view>
+			<view class="flex1">主题：<text class="topic-name">{{topicName}}</text></view>
 			<view class="topic-choose flex1" @click="chooseTopicFun">选择主题</view>
 		</view>
 	</view>
@@ -34,6 +34,10 @@
 .topic-box{
 	width: 100%;
 	height: 200upx;
+}
+
+.topic-name{
+	color: #33CC99;
 }
 
 .topic-choose{
