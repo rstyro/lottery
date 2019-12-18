@@ -18,6 +18,12 @@
 			"style": {
 				"navigationBarTitleText": "大转盘"
 			}
+		},
+		{
+			"path": "pages/specie/specie",
+			"style": {
+				"navigationBarTitleText": "硬币决策"
+			}
 		}
         ,{
             "path" : "pages/topic/choose/choose",

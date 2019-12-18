@@ -117,7 +117,7 @@ export default {
 		console.log('App Show');
 	},
 	onLoad() {
-		
+		this.shuffleBrands();
 	},
 	methods: {
 	    //翻单个牌

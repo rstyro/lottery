@@ -64,7 +64,7 @@
             position: absolute;
             left: 0;
             top: 0;
-            transition: all 3s;
+            transition: all 2s;
             backface-visibility: hidden;
 
         }

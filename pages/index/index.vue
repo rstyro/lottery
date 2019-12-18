@@ -11,7 +11,7 @@
 				</view>
 			</view>
 			
-			<view class="lottery-nav lottery-nav-specie row-box" @click="toBrand()">
+			<view class="lottery-nav lottery-nav-specie row-box" @click="toSpecie()">
 				<view class="flex2">
 					<view class="flex1 lottery-title">硬币决策</view>
 					<view class="flex1 lottery-desc">Yes or No</view>
@@ -79,6 +79,13 @@ export default {
 		toDisc(){
 			uni.navigateTo({
 				url: '/pages/disc/disc',
+				animationType: 'zoom-out',
+				animationDuration: 1000
+			});
+		},
+		toSpecie(){
+			uni.navigateTo({
+			    url: '/pages/specie/specie',
 				animationType: 'zoom-out',
 				animationDuration: 1000
 			});
