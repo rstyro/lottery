@@ -35,6 +35,10 @@
 				}
 			}
         }
+        ,{
+            "path" : "pages/topic/add/add",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

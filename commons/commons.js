@@ -13,6 +13,21 @@ const addTopicByCache = function(topic){
 	uni.setStorageSync(topicKey, topics);
 	return topics;
 }
+const delTopicByCache = function(index){
+	var topics = uni.getStorageSync(topicKey);
+	topics.splice(index,1);
+	uni.setStorageSync(topicKey, topics);
+	return topics;
+}
+const editTopicByCache = function(index,topic){
+	var topics = uni.getStorageSync(topicKey);
+	if(topics == ""){
+		var topics= new Array();
+	}
+	topics[index]=topic;
+	uni.setStorageSync(topicKey, topics);
+	return topics;
+}
 const setCurIndex = function(index){
 	uni.setStorageSync(curIndexKey,index);
 }
@@ -25,7 +40,7 @@ const reset = function(){
 	try {
 	    uni.clearStorageSync();
 		var topic = new Object();
-		topic.topicName="默认-周末去哪玩?";
+		topic.topicName="周末去哪玩?";
 		topic.list=getDefaultList();
 		addTopicByCache(topic);
 		setCurIndex(0);
@@ -51,6 +66,8 @@ export default {
     curIndexKey,
     getTopicsByCache,
 	addTopicByCache,
+	editTopicByCache,
+	delTopicByCache,
 	setCurIndex,
     getCurIndex,
     getDefaultList,

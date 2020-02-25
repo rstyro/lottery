@@ -3,7 +3,7 @@
 		<!-- 基础用法 -->
 		<uni-swipe-action >
 			<view v-for="(item,index) of topics" @click="chooseTopic(index)">
-				<uni-swipe-action-item  class="topic-li" :options="options" @click="onClick" @change="change" >
+				<uni-swipe-action-item  class="topic-li" :options="options"  @click="onClick" @change="change(index)" >
 					<view class='cont'>{{item.topicName}}</view>
 				</uni-swipe-action-item>
 			</view>
@@ -15,7 +15,7 @@
 				<view class="btn" @click="reset">重置</view>
 			</view>
 			<view class="flex1">
-				<view class="btn">添加主题</view>
+				<view class="btn" @click="toAdd">添加主题</view>
 			</view>
 		</view>
     </view>
@@ -37,7 +37,7 @@
 	        return {
 				isShowTipKey:"isShowTip",
 	            topics:[],
-				 options:[
+				options:[
 					{
 						text: '编辑',
 						style: {
@@ -49,15 +49,20 @@
 							backgroundColor: '#dd524d'
 						}
 					}
-				  ]
+				  ],
+				 editIndex:0
+				
 	        }
 	    },
-		onLoad() {
+		onShow() {
 			this.isShowOperateTip();
 			const cacheTopics = commons.getTopicsByCache();
 			if(cacheTopics){
 				this.topics=cacheTopics;
 			}
+		},
+		onLoad() {
+			
 		},
 	    methods: {
 	        chooseTopic(index){
@@ -66,10 +71,27 @@
 				uni.navigateBack({});
 			},
 			onClick(e){
-			  console.log('当前点击的是第'+e.index+'个按钮，点击内容是'+e.content.text)
+				console.log("e:",e);
+				console.log('当前点击的是第'+e.index+'个按钮，点击内容是'+e.content.text);
+				if(e.index == 0){
+					//编辑
+					uni.navigateTo({
+					    url: '/pages/topic/add/add?index='+this.editIndex,
+					    animationType: 'zoom-out',
+					    animationDuration: 1000
+					});
+				}else{
+					//删除
+					const cacheTopics = commons.delTopicByCache(this.editIndex);
+					if(cacheTopics){
+						this.topics=cacheTopics;
+					}
+				}
+				
 			},
-			change(open){
-			  console.log('当前开启状态：'+ open)
+			change(index){
+			  this.editIndex=index;
+			  console.log('当前开启状态：'+ this.editIndex);
 			},
 			isShowOperateTip(){
 				const key = this.isShowTipKey;
@@ -91,6 +113,17 @@
 			},
 			reset(){
 				commons.reset();
+				const cacheTopics = commons.getTopicsByCache();
+				if(cacheTopics){
+					this.topics=cacheTopics;
+				}
+			},
+			toAdd(){
+				uni.navigateTo({
+				    url: '/pages/topic/add/add',
+					animationType: 'zoom-out',
+					animationDuration: 1000
+				});
 			}
 	    }
 	}
